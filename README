@@ -1,0 +1,8 @@
+A tic-tac-toe game. When first started, it asks for the players names. Then
+it goes back and forth between players, asking them to input the coordinates for
+where they want to place their mark. If a coordinate does not exist or is 
+already taken, then they are asked to move again.
+
+To-Do
+	Implement win-checking. 
+	Shorten Code length
