@@ -4,7 +4,6 @@ where they want to place their mark. If a coordinate does not exist or is
 already taken, then they are asked to move again.
 
 To-Do
-	Implement win-checking. 
 	Shorten Code length
 
 Done
