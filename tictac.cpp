@@ -4,24 +4,143 @@ void printboard();
 void makemove();
 void names();
 void next_turn();
-
+int win_check();
 
 string p_one, p_two;
 char token[9] = {'?', '?', '?', '?', '?', '?', '?', '?', '?'};
 bool p_one_turn = true;
 string move_input = "--";
-
+int move_count = 0;
 int main()
 {
 	names();
 	while(1)
 	{
-//		cerr << "testpoint 1" <<endl;
 		printboard();
-//		cerr << "testpoint 2" << endl;
 		makemove();
-//		cerr << "testpoint 3" << endl;
-		next_turn();
+		if(win_check() == 0)
+		{
+			cerr << "win_check == 0" << endl;
+			move_count++;
+			next_turn();
+		}
+		else if (win_check() == 1)
+		{
+			printboard();
+			cout << p_one << " wins in " << move_count << " moves!"
+				 <<endl;
+			break;
+		}
+		else if (win_check() == 2)
+		{
+			printboard();
+			cout << p_two << " wins in " << move_count << " moves!"
+				<< endl;
+			break;
+		}
+	}
+}
+
+int win_check()
+{
+	if((token[0] == token[1])&& (token[1] == token[2])&& token[0] != '?')
+	{
+		if (token[0] == 'X')
+		{
+			return 1;
+		}
+		else if(token[0] == 'O')
+		{
+			return 2;
+		}
+	}
+
+	else if((token[3] == token[4])&& (token[4] == token[5])&&token[3]!= '?')
+	{
+		if (token[3] == 'X')
+		{
+			return 1;
+		}
+		else if(token[3] == 'O')
+		{
+			return 2;
+		}
+	}
+
+	else if((token[6] == token[7])&& (token[7] == token[8])&&token[6]!='?')
+	{
+		if (token[6] == 'X')
+		{
+			return 1;
+		}
+		else if(token[6] == 'O')
+		{
+			return 2;
+		}
+	}
+
+	else if((token[0] == token[4])&& (token[4] == token[8])&&token[0]!='?')
+	{
+		if (token[0] == 'X')
+		{
+			return 1;
+		}
+		else if(token[0] == 'O')
+		{
+			return 2;
+		}
+	}
+
+	else if((token[2] == token[4])&& (token[4] == token[6])&&token[2]!='?')
+	{
+		if (token[2] == 'X')
+		{
+			return 1;
+		}
+		else if(token[2] == 'O')
+		{
+			return 2;
+		}
+	}
+	
+	else if((token[0] == token[3])&& (token[3] == token[6])&&token[0]!='?')
+	{
+		if (token[0] == 'X')
+		{
+			return 1;
+		}
+		else if(token[0] == 'O')
+		{
+			return 2;
+		}
+	}
+
+	else if((token[1] == token[4])&& (token[4] == token[7])&&token[1]!='?')
+	{
+		if (token[1] == 'X')
+		{
+			return 1;
+		}
+		else if(token[1] == 'O')
+		{
+			return 2;
+		}
+	}
+
+	else if((token[2] == token[5])&& (token[5] == token[8])&&token[2]!='?')
+	{
+		if (token[2] == 'X')
+		{
+			return 1;
+		}
+		else if(token[2] == 'O')
+		{
+			return 2;
+		}
+	}
+	else
+	{
+		return 0;
 	}
 }
 
