@@ -14,7 +14,8 @@ bool play_again();
 void reset_values();
 
 string p_one, p_two;
-char token[9];// = {'?', '?', '?', '?', '?', '?', '?', '?', '?'};
+char used = ' ';
+char token[9];// = {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '};
 bool p_one_turn;// = true;
 string move_input = "--";
 int move_count;// = 0;
@@ -41,7 +42,7 @@ void reset_values()
 {
 	for(int i=0; i<=9; i++)
 	{
-		token[i] = '?';
+		token[i] = used;
 	}
 	move_count = 0;
 	p_one_turn = true;
@@ -110,7 +111,7 @@ bool catsgame()
 {
 	for(int i=0; i<=9; i++)
 	{
-		if (token[i] == '?')
+		if (token[i] == used)
 		{
 			return false;
 		}
@@ -121,14 +122,14 @@ bool catsgame()
 //
 //win_check() goes through the board checking for winning combinations.
 //It checks to see if the values in a row or column or diagonal are all the
-// same, and that they are not equal to '?'. If it fills this conditions,
+// same, and that they are not equal to used. If it fills this conditions,
 // it then checks to see what the values are equal to. If the values are 'X', 
 // then it returns 1. If 'O', it returns 2. If it doesn't fill the conditions,
 // it returns 0.
 //
 int win_check()
 {
-	if((token[0] == token[1])&& (token[1] == token[2])&& token[0] != '?')
+	if((token[0] == token[1])&& (token[1] == token[2])&& token[0] != used)
 	{
 		if (token[0] == 'X')
 		{
@@ -140,7 +141,7 @@ int win_check()
 		}
 	}
 
-	else if((token[3] == token[4])&& (token[4] == token[5])&&token[3]!= '?')
+	else if((token[3] == token[4])&& (token[4] == token[5])&&token[3]!= used)
 	{
 		if (token[3] == 'X')
 		{
@@ -152,7 +153,7 @@ int win_check()
 		}
 	}
 
-	else if((token[6] == token[7])&& (token[7] == token[8])&&token[6]!='?')
+	else if((token[6] == token[7])&& (token[7] == token[8])&&token[6]!=used)
 	{
 		if (token[6] == 'X')
 		{
@@ -164,7 +165,7 @@ int win_check()
 		}
 	}
 
-	else if((token[0] == token[4])&& (token[4] == token[8])&&token[0]!='?')
+	else if((token[0] == token[4])&& (token[4] == token[8])&&token[0]!=used)
 	{
 		if (token[0] == 'X')
 		{
@@ -176,7 +177,7 @@ int win_check()
 		}
 	}
 
-	else if((token[2] == token[4])&& (token[4] == token[6])&&token[2]!='?')
+	else if((token[2] == token[4])&& (token[4] == token[6])&&token[2]!=used)
 	{
 		if (token[2] == 'X')
 		{
@@ -188,7 +189,7 @@ int win_check()
 		}
 	}
 	
-	else if((token[0] == token[3])&& (token[3] == token[6])&&token[0]!='?')
+	else if((token[0] == token[3])&& (token[3] == token[6])&&token[0]!=used)
 	{
 		if (token[0] == 'X')
 		{
@@ -200,7 +201,7 @@ int win_check()
 		}
 	}
 
-	else if((token[1] == token[4])&& (token[4] == token[7])&&token[1]!='?')
+	else if((token[1] == token[4])&& (token[4] == token[7])&&token[1]!=used)
 	{
 		if (token[1] == 'X')
 		{
@@ -212,7 +213,7 @@ int win_check()
 		}
 	}
 
-	else if((token[2] == token[5])&& (token[5] == token[8])&&token[2]!='?')
+	else if((token[2] == token[5])&& (token[5] == token[8])&&token[2]!=used)
 	{
 		if (token[2] == 'X')
 		{
@@ -284,7 +285,7 @@ void makemove()
 
 	if(move_input == "a1" || move_input == "A1")
 	{
-		if(token[0] != '?')
+		if(token[0] != used)
 		{
 			cout << "Sorry, that spot is taken" <<endl;
 			makemove();
@@ -303,7 +304,7 @@ void makemove()
 	else if(move_input == "a2" || move_input == "A2")
 	{
 		
-		if(token[1] != '?')
+		if(token[1] != used)
 		{
 			cout << "Sorry, that spot is taken" <<endl;
 			makemove();
@@ -321,7 +322,7 @@ void makemove()
 	else if(move_input == "a3" || move_input == "A3")
 	{
 		
-		if(token[2] != '?')
+		if(token[2] != used)
 		{
 			cout << "Sorry, that spot is taken" <<endl;
 			makemove();
@@ -340,7 +341,7 @@ void makemove()
 	else if(move_input == "b1" || move_input == "B1")
 	{
 		
-		if(token[3] != '?')
+		if(token[3] != used)
 		{
 			cout << "Sorry, that spot is taken" <<endl;
 			makemove();
@@ -358,7 +359,7 @@ void makemove()
 
 	else if(move_input == "b2" || move_input == "B2")
 	{
-		if(token[4] != '?')
+		if(token[4] != used)
 		{
 			cout << "Sorry, that spot is taken" <<endl;
 			makemove();
@@ -376,7 +377,7 @@ void makemove()
 
 	else if(move_input == "b3" || move_input == "B3")
 	{
-		if(token[5] != '?')
+		if(token[5] != used)
 		{
 			cout << "Sorry, that spot is taken" <<endl;
 			makemove();
@@ -395,7 +396,7 @@ void makemove()
 	else if(move_input == "c1" || move_input == "C1")
 	{
 	
-		if(token[6] != '?')
+		if(token[6] != used)
 		{
 			cout << "Sorry, that spot is taken" <<endl;
 			makemove();
@@ -414,7 +415,7 @@ void makemove()
 	else if(move_input == "c2" || move_input == "C2")
 	{
 	
-		if(token[7] != '?')
+		if(token[7] != used)
 		{
 			cout << "Sorry, that spot is taken" <<endl;
 			makemove();
@@ -433,7 +434,7 @@ void makemove()
 	else if(move_input == "c3" || move_input == "C3")
 	{
 
-		if(token[8] != '?')
+		if(token[8] != used)
 		{
 			cout << "Sorry, that spot is taken" <<endl;
 			makemove();
