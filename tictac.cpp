@@ -1,46 +1,131 @@
 #include <iostream>
+#include <cstdlib>
 using namespace std;
+
 void printboard();
 void makemove();
 void names();
 void next_turn();
 int win_check();
+bool catsgame();
+void whos_turn();
+void turn_end_check();
+bool play_again();
+void reset_values();
 
 string p_one, p_two;
-char token[9] = {'?', '?', '?', '?', '?', '?', '?', '?', '?'};
-bool p_one_turn = true;
+char token[9];// = {'?', '?', '?', '?', '?', '?', '?', '?', '?'};
+bool p_one_turn;// = true;
 string move_input = "--";
-int move_count = 0;
+int move_count;// = 0;
+bool game_goes_on;
+
 int main()
 {
+	do{
+	reset_values();
+	
 	names();
-	while(1)
+		do
+		{
+			printboard();
+			whos_turn();
+			makemove();
+			turn_end_check();
+		}while(game_goes_on == true);
+	}
+	while(play_again() != false);
+}
+
+void reset_values()
+{
+	for(int i=0; i<=9; i++)
+	{
+		token[i] = '?';
+	}
+	move_count = 0;
+	p_one_turn = true;
+}
+
+bool play_again()
+{
+	char again;
+	cout << "Good Game! Would you like to play again? (Y/N)" << endl;
+	cin >> again;
+	
+	if(again == 'Y')
+	{
+		return true;
+	}
+
+	return false;
+}
+
+void turn_end_check()
+{
+
+	if(win_check() == 0)
+	{
+		move_count++;
+		game_goes_on = true;
+		next_turn();
+	}
+	else if (win_check() == 1)
 	{
 		printboard();
-		makemove();
-		if(win_check() == 0)
-		{
-			cerr << "win_check == 0" << endl;
-			move_count++;
-			next_turn();
-		}
-		else if (win_check() == 1)
-		{
-			printboard();
-			cout << p_one << " wins in " << move_count << " moves!"
-				 <<endl;
-			break;
-		}
-		else if (win_check() == 2)
-		{
-			printboard();
-			cout << p_two << " wins in " << move_count << " moves!"
-				<< endl;
-			break;
-		}
+		cout << p_one << " wins in " << move_count << " moves!"
+			 <<endl;
+		game_goes_on = false;
+//		exit(1);
+	}
+	else if (win_check() == 2)
+	{
+		printboard();
+		cout << p_two << " wins in " << move_count << " moves!"
+			<< endl;
+		game_goes_on = false;
+//		exit(1);
+	}
+	else if(win_check()==3)
+	{
+		cout << "There are no more moves!" << endl;
+		game_goes_on = false;
+	}
+	
+}
+
+void whos_turn()
+{
+	if(p_one_turn == true)
+	{
+		cout << "It is " << p_one << "'s turn" << endl;
+	}
+	else
+	{
+		cout << "It is " << p_two << "'s turn" << endl;
 	}
 }
 
+bool catsgame()
+{
+	for(int i=0; i<=9; i++)
+	{
+		if (token[i] == '?')
+		{
+			return false;
+		}
+	}
+	return true;
+}
+
+//
+//win_check() goes through the board checking for winning combinations.
+//It checks to see if the values in a row or column or diagonal are all the
+// same, and that they are not equal to '?'. If it fills this conditions,
+// it then checks to see what the values are equal to. If the values are 'X', 
+// then it returns 1. If 'O', it returns 2. If it doesn't fill the conditions,
+// it returns 0.
+//
 int win_check()
 {
 	if((token[0] == token[1])&& (token[1] == token[2])&& token[0] != '?')
@@ -138,12 +223,17 @@ int win_check()
 			return 2;
 		}
 	}
-	else
+	else if(catsgame() == true)
 	{
-		return 0;
+		return 3;
 	}
+
+	return 0;
 }
 
+//
+// next_turn() switches the value of p_on_turn every time it is called.
+//
 void next_turn()
 {
 	if(p_one_turn == false)
@@ -152,6 +242,9 @@ void next_turn()
 		{p_one_turn = false;}
 }
 
+//
+//names() initializes the names of the two players
+//
 void names()
 {
 	cout << "What is Player 1's Name?" << endl;
@@ -164,6 +257,9 @@ void names()
 	cout << "X: " << p_one << "   O: " << p_two << endl;
 }
 
+//
+// printboard() prints out the board and its current values.
+//
 void printboard()
 {
 	cout << endl << endl;
@@ -177,6 +273,9 @@ void printboard()
 	cout << "  -------------" << endl;
 }	
 
+//
+//makemove() 
+//
 void makemove()
 {
 	cout << "Where would you like to move?" << endl;
