@@ -54,7 +54,7 @@ bool play_again()
 	cout << "Good Game! Would you like to play again? (Y/N)" << endl;
 	cin >> again;
 	
-	if(again == 'Y')
+	if(again == 'Y' || 'y')
 	{
 		return true;
 	}
