@@ -14,7 +14,7 @@ bool play_again();
 void reset_values();
 
 string p_one, p_two;
-char used = ' ';
+char empty = ' ';
 char token[9];// = {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '};
 bool p_one_turn;// = true;
 string move_input = "--";
@@ -42,7 +42,7 @@ void reset_values()
 {
 	for(int i=0; i<=9; i++)
 	{
-		token[i] = used;
+		token[i] = empty;
 	}
 	move_count = 0;
 	p_one_turn = true;
@@ -111,7 +111,7 @@ bool catsgame()
 {
 	for(int i=0; i<=9; i++)
 	{
-		if (token[i] == used)
+		if (token[i] == empty)
 		{
 			return false;
 		}
@@ -129,7 +129,7 @@ bool catsgame()
 //
 int win_check()
 {
-	if((token[0] == token[1])&& (token[1] == token[2])&& token[0] != used)
+	if((token[0] == token[1])&& (token[1] == token[2])&& token[0] != empty)
 	{
 		if (token[0] == 'X')
 		{
@@ -141,7 +141,7 @@ int win_check()
 		}
 	}
 
-	else if((token[3] == token[4])&& (token[4] == token[5])&&token[3]!= used)
+	else if((token[3] == token[4])&& (token[4] == token[5])&&token[3]!= empty)
 	{
 		if (token[3] == 'X')
 		{
@@ -153,7 +153,7 @@ int win_check()
 		}
 	}
 
-	else if((token[6] == token[7])&& (token[7] == token[8])&&token[6]!=used)
+	else if((token[6] == token[7])&& (token[7] == token[8])&&token[6]!=empty)
 	{
 		if (token[6] == 'X')
 		{
@@ -165,7 +165,7 @@ int win_check()
 		}
 	}
 
-	else if((token[0] == token[4])&& (token[4] == token[8])&&token[0]!=used)
+	else if((token[0] == token[4])&& (token[4] == token[8])&&token[0]!=empty)
 	{
 		if (token[0] == 'X')
 		{
@@ -177,7 +177,7 @@ int win_check()
 		}
 	}
 
-	else if((token[2] == token[4])&& (token[4] == token[6])&&token[2]!=used)
+	else if((token[2] == token[4])&& (token[4] == token[6])&&token[2]!=empty)
 	{
 		if (token[2] == 'X')
 		{
@@ -189,7 +189,7 @@ int win_check()
 		}
 	}
 	
-	else if((token[0] == token[3])&& (token[3] == token[6])&&token[0]!=used)
+	else if((token[0] == token[3])&& (token[3] == token[6])&&token[0]!=empty)
 	{
 		if (token[0] == 'X')
 		{
@@ -201,7 +201,7 @@ int win_check()
 		}
 	}
 
-	else if((token[1] == token[4])&& (token[4] == token[7])&&token[1]!=used)
+	else if((token[1] == token[4])&& (token[4] == token[7])&&token[1]!=empty)
 	{
 		if (token[1] == 'X')
 		{
@@ -213,7 +213,7 @@ int win_check()
 		}
 	}
 
-	else if((token[2] == token[5])&& (token[5] == token[8])&&token[2]!=used)
+	else if((token[2] == token[5])&& (token[5] == token[8])&&token[2]!=empty)
 	{
 		if (token[2] == 'X')
 		{
@@ -290,7 +290,7 @@ void makemove()
 
 	if(move_input == "a1" || move_input == "A1")
 	{
-		if(token[0] != used)
+		if(token[0] != empty)
 		{
 			cout << "Sorry, that spot is taken" <<endl;
 			makemove();
@@ -309,7 +309,7 @@ void makemove()
 	else if(move_input == "a2" || move_input == "A2")
 	{
 		
-		if(token[1] != used)
+		if(token[1] != empty)
 		{
 			cout << "Sorry, that spot is taken" <<endl;
 			makemove();
@@ -327,7 +327,7 @@ void makemove()
 	else if(move_input == "a3" || move_input == "A3")
 	{
 		
-		if(token[2] != used)
+		if(token[2] != empty)
 		{
 			cout << "Sorry, that spot is taken" <<endl;
 			makemove();
@@ -346,7 +346,7 @@ void makemove()
 	else if(move_input == "b1" || move_input == "B1")
 	{
 		
-		if(token[3] != used)
+		if(token[3] != empty)
 		{
 			cout << "Sorry, that spot is taken" <<endl;
 			makemove();
@@ -364,7 +364,7 @@ void makemove()
 
 	else if(move_input == "b2" || move_input == "B2")
 	{
-		if(token[4] != used)
+		if(token[4] != empty)
 		{
 			cout << "Sorry, that spot is taken" <<endl;
 			makemove();
@@ -382,7 +382,7 @@ void makemove()
 
 	else if(move_input == "b3" || move_input == "B3")
 	{
-		if(token[5] != used)
+		if(token[5] != empty)
 		{
 			cout << "Sorry, that spot is taken" <<endl;
 			makemove();
@@ -401,7 +401,7 @@ void makemove()
 	else if(move_input == "c1" || move_input == "C1")
 	{
 	
-		if(token[6] != used)
+		if(token[6] != empty)
 		{
 			cout << "Sorry, that spot is taken" <<endl;
 			makemove();
@@ -420,7 +420,7 @@ void makemove()
 	else if(move_input == "c2" || move_input == "C2")
 	{
 	
-		if(token[7] != used)
+		if(token[7] != empty)
 		{
 			cout << "Sorry, that spot is taken" <<endl;
 			makemove();
@@ -439,7 +439,7 @@ void makemove()
 	else if(move_input == "c3" || move_input == "C3")
 	{
 
-		if(token[8] != used)
+		if(token[8] != empty)
 		{
 			cout << "Sorry, that spot is taken" <<endl;
 			makemove();
