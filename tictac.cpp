@@ -237,10 +237,15 @@ int win_check()
 //
 void next_turn()
 {
+	p_one_turn = !p_one_turn;
+
+//	depracated code
+/*
 	if(p_one_turn == false)
 		{p_one_turn = true;}
 	else if(p_one_turn == true)
 		{p_one_turn = false;}
+*/
 }
 
 //
