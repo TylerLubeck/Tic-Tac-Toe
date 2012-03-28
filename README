@@ -4,7 +4,11 @@ where they want to place their mark. If a coordinate does not exist or is
 already taken, then they are asked to move again.
 
 To-Do
-	Shorten Code length
+	Person vs. Computer?
+	move variables in to main
+	Change to accept spaces in names
+	
 
 Done
 	Implement win-checking (3/21/12 - 6:51PM Eastern)
+	Shorten Code Length
