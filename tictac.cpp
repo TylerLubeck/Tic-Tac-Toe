@@ -13,13 +13,14 @@ void turn_end_check();
 bool play_again();
 void reset_values();
 void move(int);
+bool win_check_bool(int, int, int);
 
 string p_one, p_two;
 char empty = ' ';
-char token[9];// = {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '};
-bool p_one_turn;// = true;
+char token[9];
+bool p_one_turn;
 string move_input = "--";
-int move_count;// = 0;
+int move_count;
 bool game_goes_on;
 
 int main()
@@ -78,7 +79,6 @@ void turn_end_check()
 		cout << p_one << " wins in " << move_count << " moves!"
 			 <<endl;
 		game_goes_on = false;
-//		exit(1);
 	}
 	else if (win_check() == 2)
 	{
@@ -86,7 +86,6 @@ void turn_end_check()
 		cout << p_two << " wins in " << move_count << " moves!"
 			<< endl;
 		game_goes_on = false;
-//		exit(1);
 	}
 	else if(win_check()==3)
 	{
@@ -135,6 +134,13 @@ int winner(int spot)
 
 }
 
+bool win_check_bool(int first, int second, int third)
+{
+	return  ((token[first] == token[second])
+		&&(token[second]==token[third])
+		&&token[first]!=empty);
+}
+
 //
 //win_check() goes through the board checking for winning combinations.
 //It checks to see if the values in a row or column or diagonal are all the
@@ -147,43 +153,35 @@ int win_check()
 {
 	int who_won;
 
-	if((token[0] == token[1])&& (token[1] == token[2])&& token[0] != empty)
+	if(win_check_bool(0,1,2))
 	{
 		who_won = winner(0);
 	}
-
-	else if((token[3]==token[4])&&(token[4]==token[5])&&token[3]!=empty)
+	else if(win_check_bool(3,4,5))
 	{
 		who_won = winner(3);
 	}
-
-	else if((token[6] == token[7])&& (token[7] == token[8])&&token[6]!=empty)
+	else if(win_check_bool(6,7,8))
 	{
 		who_won = winner(6);
 	}
-
-	else if((token[0]==token[4])&&(token[4]==token[8])&&token[0]!=empty)
+	else if(win_check_bool(0,4,8))
 	{
-	
 		who_won = winner(0);
 	}
-
-	else if((token[2]==token[4])&& (token[4]==token[6])&&token[2]!=empty)
+	else if(win_check_bool(2,4,6))
 	{
 		who_won = winner(2);
 	}
-	
-	else if((token[0]==token[3])&&(token[3]==token[6])&&token[0]!=empty)
+	else if(win_check_bool(0,3,6))
 	{
 		who_won = winner(0);
 	}
-
-	else if((token[1]==token[4])&&(token[4]==token[7])&&token[1]!=empty)
+	else if(win_check_bool(1,4,7))
 	{
 		who_won = winner(1);
 	}
-
-	else if((token[2]==token[5])&& (token[5]==token[8])&&token[2]!=empty)
+	else if(win_check_bool(2,5,8))
 	{
 		who_won = winner(2);
 	}
@@ -191,7 +189,6 @@ int win_check()
 	{
 		return 3;
 	}
-
 	return who_won;
 }
 
@@ -201,14 +198,6 @@ int win_check()
 void next_turn()
 {
 	p_one_turn = !p_one_turn;
-
-//	depracated code
-/*
-	if(p_one_turn == false)
-		{p_one_turn = true;}
-	else if(p_one_turn == true)
-		{p_one_turn = false;}
-*/
 }
 
 //
