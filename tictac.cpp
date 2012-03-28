@@ -12,6 +12,7 @@ void whos_turn();
 void turn_end_check();
 bool play_again();
 void reset_values();
+void move(int);
 
 string p_one, p_two;
 char empty = ' ';
@@ -54,7 +55,7 @@ bool play_again()
 	cout << "Good Game! Would you like to play again? (Y/N)" << endl;
 	cin >> again;
 	
-	if(again == 'Y' || 'y')
+	if(again == 'Y' || again == 'y')
 	{
 		return true;
 	}
@@ -89,7 +90,7 @@ void turn_end_check()
 	}
 	else if(win_check()==3)
 	{
-		cout << "There are no more moves!" << endl;
+		cout << "There are no more available moves!" << endl;
 		game_goes_on = false;
 	}
 	
@@ -119,6 +120,21 @@ bool catsgame()
 	return true;
 }
 
+int winner(int spot)
+{
+
+	if (token[spot] == 'X')
+	{
+		return 1;
+	}
+//	else if(token[spot] == 'O')
+//	{
+		return 2;
+//	}
+
+
+}
+
 //
 //win_check() goes through the board checking for winning combinations.
 //It checks to see if the values in a row or column or diagonal are all the
@@ -129,107 +145,54 @@ bool catsgame()
 //
 int win_check()
 {
+	int who_won;
+
 	if((token[0] == token[1])&& (token[1] == token[2])&& token[0] != empty)
 	{
-		if (token[0] == 'X')
-		{
-			return 1;
-		}
-		else if(token[0] == 'O')
-		{
-			return 2;
-		}
+		who_won = winner(0);
 	}
 
-	else if((token[3] == token[4])&& (token[4] == token[5])&&token[3]!= empty)
+	else if((token[3]==token[4])&&(token[4]==token[5])&&token[3]!=empty)
 	{
-		if (token[3] == 'X')
-		{
-			return 1;
-		}
-		else if(token[3] == 'O')
-		{
-			return 2;
-		}
+		who_won = winner(3);
 	}
 
 	else if((token[6] == token[7])&& (token[7] == token[8])&&token[6]!=empty)
 	{
-		if (token[6] == 'X')
-		{
-			return 1;
-		}
-		else if(token[6] == 'O')
-		{
-			return 2;
-		}
+		who_won = winner(6);
 	}
 
-	else if((token[0] == token[4])&& (token[4] == token[8])&&token[0]!=empty)
+	else if((token[0]==token[4])&&(token[4]==token[8])&&token[0]!=empty)
 	{
-		if (token[0] == 'X')
-		{
-			return 1;
-		}
-		else if(token[0] == 'O')
-		{
-			return 2;
-		}
+	
+		who_won = winner(0);
 	}
 
-	else if((token[2] == token[4])&& (token[4] == token[6])&&token[2]!=empty)
+	else if((token[2]==token[4])&& (token[4]==token[6])&&token[2]!=empty)
 	{
-		if (token[2] == 'X')
-		{
-			return 1;
-		}
-		else if(token[2] == 'O')
-		{
-			return 2;
-		}
+		who_won = winner(2);
 	}
 	
-	else if((token[0] == token[3])&& (token[3] == token[6])&&token[0]!=empty)
+	else if((token[0]==token[3])&&(token[3]==token[6])&&token[0]!=empty)
 	{
-		if (token[0] == 'X')
-		{
-			return 1;
-		}
-		else if(token[0] == 'O')
-		{
-			return 2;
-		}
+		who_won = winner(0);
 	}
 
-	else if((token[1] == token[4])&& (token[4] == token[7])&&token[1]!=empty)
+	else if((token[1]==token[4])&&(token[4]==token[7])&&token[1]!=empty)
 	{
-		if (token[1] == 'X')
-		{
-			return 1;
-		}
-		else if(token[1] == 'O')
-		{
-			return 2;
-		}
+		who_won = winner(1);
 	}
 
-	else if((token[2] == token[5])&& (token[5] == token[8])&&token[2]!=empty)
+	else if((token[2]==token[5])&& (token[5]==token[8])&&token[2]!=empty)
 	{
-		if (token[2] == 'X')
-		{
-			return 1;
-		}
-		else if(token[2] == 'O')
-		{
-			return 2;
-		}
+		who_won = winner(2);
 	}
 	else if(catsgame() == true)
 	{
 		return 3;
 	}
 
-	return 0;
+	return who_won;
 }
 
 //
@@ -290,172 +253,62 @@ void makemove()
 
 	if(move_input == "a1" || move_input == "A1")
 	{
-		if(token[0] != empty)
-		{
-			cout << "Sorry, that spot is taken" <<endl;
-			makemove();
-		}
-		else if(p_one_turn == true)
-		{
-			token[0] = 'X';
-		}
-		else if(p_one_turn == false)
-		{
-			token[0] = 'O';
-		}
+		move(0);
 	}
-
-
 	else if(move_input == "a2" || move_input == "A2")
 	{
-		
-		if(token[1] != empty)
-		{
-			cout << "Sorry, that spot is taken" <<endl;
-			makemove();
-		}
-		else if(p_one_turn == true)
-		{
-			token[1] = 'X';
-		}
-		else if(p_one_turn == false)
-		{
-			token[1] = 'O';
-		}
+		move(1);	
 	}
-
 	else if(move_input == "a3" || move_input == "A3")
 	{
-		
-		if(token[2] != empty)
-		{
-			cout << "Sorry, that spot is taken" <<endl;
-			makemove();
-		}
-		else if(p_one_turn == true)
-		{
-			token[2] = 'X';
-		}
-		else if(p_one_turn == false)
-		{
-			token[2] = 'O';
-		}
+		move(2);	
 	}
-
 
 	else if(move_input == "b1" || move_input == "B1")
 	{
-		
-		if(token[3] != empty)
-		{
-			cout << "Sorry, that spot is taken" <<endl;
-			makemove();
-		}
-		else if(p_one_turn == true)
-		{
-			token[3] = 'X';
-		}
-		else if(p_one_turn == false)
-		{
-			token[3] = 'O';
-		}
+		move(3);	
 	}
-
-
 	else if(move_input == "b2" || move_input == "B2")
 	{
-		if(token[4] != empty)
-		{
-			cout << "Sorry, that spot is taken" <<endl;
-			makemove();
-		}
-		else if(p_one_turn == true)
-		{
-			token[4] = 'X';
-		}
-		else if(p_one_turn == false)
-		{
-			token[4] = 'O';
-		}
+		move(4);
 	}
-
-
 	else if(move_input == "b3" || move_input == "B3")
 	{
-		if(token[5] != empty)
-		{
-			cout << "Sorry, that spot is taken" <<endl;
-			makemove();
-		}
-		if(p_one_turn == true)
-		{
-			token[5] = 'X';
-		}
-		else if(p_one_turn == false)
-		{
-			token[5] = 'O';
-		}
+		move(5);
 	}
-
-
 	else if(move_input == "c1" || move_input == "C1")
 	{
-	
-		if(token[6] != empty)
-		{
-			cout << "Sorry, that spot is taken" <<endl;
-			makemove();
-		}
-		if(p_one_turn == true)
-		{
-			token[6] = 'X';
-		}
-		else if(p_one_turn == false)
-		{
-			token[6] = 'O';
-		}
+		move(6);	
 	}
-
-
 	else if(move_input == "c2" || move_input == "C2")
 	{
-	
-		if(token[7] != empty)
-		{
-			cout << "Sorry, that spot is taken" <<endl;
-			makemove();
-		}
-		if(p_one_turn == true)
-		{
-			token[7] = 'X';
-		}
-		else if(p_one_turn == false)
-		{
-			token[7] = 'O';
-		}
+		move(7);	
 	}
-
-
 	else if(move_input == "c3" || move_input == "C3")
 	{
-
-		if(token[8] != empty)
-		{
-			cout << "Sorry, that spot is taken" <<endl;
-			makemove();
-		}
-		if(p_one_turn == true)
-		{
-			token[8] = 'X';
-		}
-		else if(p_one_turn == false)
-		{
-			token[8] = 'O';
-		}
+		move(8);
 	}
 	else
 	{
 		cout << "Sorry, That is not a valid position" << endl;
 		makemove();
+	}
+}
+
+void move(int spot)
+{
+
+	if(token[spot] != empty)
+	{
+		cout << "Sorry, that spot is taken" <<endl;
+		makemove();
+	}
+	else if(p_one_turn == true)
+	{
+		token[spot] = 'X';
+	}
+	else if(p_one_turn == false)
+	{
+		token[spot] = 'O';
 	}
 }
